@@ -1,0 +1,701 @@
+<html>
+<head>
+<title>UIPCLI - Help Docs</title>
+</head>
+<body>
+<pre>
+
+<h1>UIPCLI - Reference</h1>
+
+This is a list-out of the functions of <a href="https://www.myget.org/feed/uipath-dev/package/nuget/UiPath.CLI">UIPCLI version 1.0.7985.19721</a>.
+
+<h2>Main</h2>
+
+C:\uipathcli\lib\net461>uipcli
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+ERROR(S):
+  No verb selected.
+
+  <a href="#app">app</a>        Install or uninstall UiPath Studio or Orchestrator unattended.
+  <a href="#asset">asset</a>      Manage Orchestrator assets.
+  <a href="#job">job</a>        Run jobs on Orchestrator.
+  <a href="#machine">machine</a>    Manage Orchestrator machines.
+  <a href="#package">package</a>    Build, deploy or delete packages.
+  <a href="#process">process</a>    Manage Orchestrator processes.
+  <a href="#robot">robot</a>      Manage Orchestrator robots.
+  <a href="#run">run</a>        Run the tool using arguments specified in a JSON file.
+  <a href="#test">test</a>       Run tests on Orchestrator.
+  help       Display more information on a specific command.
+  version    Display version information.
+  
+
+<h3 id="app">> app <<<<============================================================></h3>
+C:\uipathcli\lib\net461>uipcli app
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  <a href="#app-install">install</a>      Install Studio or Orchestrator.
+  <a href="#app-license">license</a>      License Orchestrator.
+  <a href="#app-uninstall">uninstall</a>    Uninstall Studio or Orchestrator.
+  help         Display more information on a specific command.
+  version      Display version information.
+
+
+<h4 id="app-install">==> app install</h4>
+C:\uipathcli\lib\net461>uipcli app install
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  -m, --msi_file                     <b>Required</b>. Full path and filename of the msi installer file.
+  -a, --arguments                    Custom arguments that will be passed on to the installer.
+  -y, --disableTelemetry
+  --help                             Display this help screen.
+  --version                          Display version information.
+  Application to install (pos. 0)    <b>Required</b>. This specifies the application to install: Studio or Orchestrator.
+
+  app install usage: app install <application> -m <msi_file> [-a <arguments>] [-l <language>]
+
+  Examples:
+    app install Studio -m UiPathStudio.msi
+    app install Studio --msi_file UiPathStudio.msi --arguments "ADDLOCAL=DesktopFeature,Studio,Robot,RegisterService,Packages CODE=12345678"
+    app install Orchestrator --msi_file c:\Programe\UiPathOrchestrator.msi --arguments "APPPOOL_IDENTITY_TYPE = APPPOOLIDENTITY HOSTADMIN_PASSWORD = Pass1234 HOSTADMIN_PASSWORD_ONETIME = 1 DEFAULTTENANTADMIN_PASSWORD = Pass0987 DEFAULTTENANTADMIN_PASSWORD_ONETIME = 1" -l en-US
+
+
+<h4 id="app-license">==> app license</h4>
+C:\uipathcli\lib\net461>uipcli app license
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  -L, --license_file              <b>Required</b>. File path with license content
+  -u, --username                  <b>Required</b>. The Orchestrator username used for authentication. Must be used together with the password.
+  -p, --password                  <b>Required</b>. The Orchestrator password used for authentication. Must be used together with the username.
+  -t, --token                     <b>Required</b>. The Orchestrator OAuth2 refresh token used for authentication. Must be used together with the account name and client id.
+  -a, --accountName               <b>Required</b>. The Orchestrator CloudRPA account name. Must be used together with the refresh token and client id.
+  -o, --organizationUnit          The Orchestrator folder (organization unit).
+  -l, --language                  The orchestrator language.
+  -y, --disableTelemetry          Disable telemetry data.
+  --help                          Display this help screen.
+  --version                       Display version information.
+  Orchestrator URL (pos. 0)       <b>Required</b>. The URL of the Orchestrator instance.
+  Orchestrator Tenant (pos. 1)    <b>Required</b>. The tenant of the Orchestrator instance.
+
+  app license usage: app license <orchestrator_url> <orchestrator_tenant> [-L <license_file>] [-u <orchestrator_user>] [-p <orchestrator_pass>] [-t <auth_token>] [-l <language>]
+
+  Examples:
+    app license https://uipath-orchestrator.myorg.com default -p 123456 -o OurOrganization -u admin -L ./license.txt -l en-US
+
+<h4 id="app-uninstall">==> app uninstall</h4>
+C:\uipathcli\lib\net461>uipcli app uninstall
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  -m, --msi_file                       <b>Required</b>. Full path and filename of the msi installer file.
+  -y, --disableTelemetry
+  --help                               Display this help screen.
+  --version                            Display version information.
+  Application to uninstall (pos. 0)    <b>Required</b>. This specifies the application to uninstall: Studio or Orchestrator.
+
+  app uninstall usage: app uninstall <application> -m <msi_file> [-l <language>]
+
+  Examples:
+    app uninstall Studio -m UiPathStudio.msi
+    app uninstall Orchestrator -m UiPathOrchestrator.msi -l en-US
+
+<h3 id="asset">> asset <<<<============================================================></h3>
+C:\uipathcli\lib\net461>uipcli asset
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  <a href="#asset-delete">delete</a>     Delete assets from an Orchestrator instance (based on asset name).
+  <a href="#asset-deploy">deploy</a>     Deploy assets to an Orchestrator instance.
+  help       Display more information on a specific command.
+  version    Display version information.
+
+<h4 id="asset-delete">==> asset delete</h4>
+C:\uipathcli\lib\net461>uipcli asset delete
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  -u, --username                  <b>Required</b>. The Orchestrator username used for authentication. Must be used together with the password.
+  -p, --password                  <b>Required</b>. The Orchestrator password used for authentication. Must be used together with the username.
+  -t, --token                     <b>Required</b>. The Orchestrator OAuth2 refresh token used for authentication. Must be used together with the account name and client id.
+  -a, --accountName               <b>Required</b>. The Orchestrator CloudRPA account name. Must be used together with the refresh token and client id.
+  -o, --organizationUnit          The Orchestrator folder (organization unit).
+  -l, --language                  The orchestrator language.
+  -y, --disableTelemetry          Disable telemetry data.
+  --help                          Display this help screen.
+  --version                       Display version information.
+  Assets File (pos. 0)            <b>Required</b>. The file containing the assets to be deleted.
+
+                                  The following is a sample csv file. The column names are <b>Required</b>! Only the first column is used but you need to at least have empty columns in place.
+                                  name,type,value
+                                  asset_1_name,,asset_value # we can have comments
+                                  asset_2_name,integer,
+                                  asset_3_name,,
+                                  asset_4_name,credential,username:password
+
+  Orchestrator URL (pos. 1)       <b>Required</b>. The URL of the Orchestrator instance.
+  Orchestrator Tenant (pos. 2)    <b>Required</b>. The tenant of the Orchestrator instance.
+
+  asset delete usage: asset delete <assets_file> <orchestrator_url> <orchestrator_tenant> [-u <orchestrator_user> -p <orchestrator_pass>] [-t <auth_token>] [-o <folder>] [-l <language>]
+
+  Examples:
+    asset delete assets_file.csv "https://uipath-orchestrator.myorg.com" default -u admin -p 123456
+    asset delete assets_file.csv "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -o OurOrganization
+    asset delete assets_file.csv "https://uipath-orchestrator.myorg.com" default -t a7da29a2c93a717110a82 -a myAccount -l en-US
+
+<h4 id="asset-deploy">==> asset deploy</h4>
+C:\uipathcli\lib\net461>uipcli asset deploy
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  -u, --username                  <b>Required</b>. The Orchestrator username used for authentication. Must be used together with the password.
+  -p, --password                  <b>Required</b>. The Orchestrator password used for authentication. Must be used together with the username.
+  -t, --token                     <b>Required</b>. The Orchestrator OAuth2 refresh token used for authentication. Must be used together with the account name and client id.
+  -a, --accountName               <b>Required</b>. The Orchestrator CloudRPA account name. Must be used together with the refresh token and client id.
+  -o, --organizationUnit          The Orchestrator folder (organization unit).
+  -l, --language                  The orchestrator language.
+  -y, --disableTelemetry          Disable telemetry data.
+  --help                          Display this help screen.
+  --version                       Display version information.
+  Assets File (pos. 0)            <b>Required</b>. The file containing assets to be deployed in CSV format name,type,value.
+
+                                  The following is a sample csv file. The column names are <b>Required</b>!
+                                  name,type,value
+                                  asset_1_name,text,asset_value # we can have comments
+                                  asset_2_name,integer,123
+                                  asset_3_name,boolean,false
+                                  asset_4_name,credential,"username::password"
+
+
+  Orchestrator URL (pos. 1)       <b>Required</b>. The URL of the Orchestrator instance.
+  Orchestrator Tenant (pos. 2)    <b>Required</b>. The tenant of the Orchestrator instance.
+
+  asset deploy usage: asset deploy <assets_file> <orchestrator_url> <orchestrator_tenant> [-u <orchestrator_user> -p <orchestrator_pass>] [-t <auth_token>] [-o <folder>] [-l <language>]
+
+  Examples:
+    asset deploy assets_file.csv "https://uipath-orchestrator.myorg.com" default -u admin -p 123456
+    asset deploy assets_file.csv "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -o OurOrganization
+    asset deploy assets_file.csv "https://uipath-orchestrator.myorg.com" default -t a7da29a2c93a717110a82 -a myAccount -l en-US
+
+<h3 id="job">> job <<<<============================================================></h3>
+C:\uipathcli\lib\net461>uipcli job
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  run        Trigger a job on Orchestrator
+  help       Display more information on a specific command.
+  version    Display version information.
+
+<h4 id="job-run">==> job run</h4>
+C:\uipathcli\lib\net461>uipcli job run
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  -i, --input_path                The full path to a JSON input file. Only <b>Required</b> if the entry-point workflow has input parameters.
+  -P, --priority                  The priority of job runs. One of the following values: Low, Normal, High. (default Normal)
+  -r, --robots                    The comma-separated list of specific robot names.
+  -j, --jobscount                 The number of job runs. (default 1)
+  -U, --user                      The name of the user. This should be a machine user, not an orchestrator user. For local users, the format should be MachineName\UserName
+  -M, --machine                   The name of the machine.
+  -R, --result_path               The full path to a JSON file or a folder where the result json file will be created.
+  -T, --timeout                   The timeout for job executions in seconds. (default 1800)
+  -f, --fail_when_job_fails       The command fails when at least one job fails. (default true)
+  -w, --wait                      The command waits for job runs completion. (default true)
+  -b, --job_type                  The type of the job that will run. Values supported for this command: Unattended, NonProduction. For classic folders do not specify this argument
+  -u, --username                  <b>Required</b>. The Orchestrator username used for authentication. Must be used together with the password.
+  -p, --password                  <b>Required</b>. The Orchestrator password used for authentication. Must be used together with the username.
+  -t, --token                     <b>Required</b>. The Orchestrator OAuth2 refresh token used for authentication. Must be used together with the account name and client id.
+  -a, --accountName               <b>Required</b>. The Orchestrator CloudRPA account name. Must be used together with the refresh token and client id.
+  -o, --organizationUnit          The Orchestrator folder (organization unit).
+  -l, --language                  The orchestrator language.
+  -y, --disableTelemetry          Disable telemetry data.
+  --help                          Display this help screen.
+  --version                       Display version information.
+  Process Name (pos. 0)           <b>Required</b>.
+  Orchestrator URL (pos. 1)       <b>Required</b>. The URL of the Orchestrator instance.
+  Orchestrator Tenant (pos. 2)    <b>Required</b>. The tenant of the Orchestrator instance.
+
+  job run usage: job run <process_name> <orchestrator_url> <orchestrator_tenant> [-i <input_path>] [-j <jobscount>] [-R <result_path>] [-P <priority>] [-r <robots>] [-f <do_not_fail_when_job_fails>] [-T <timeout>] [-w <do_not_wait>] [-u <orchestrator_user> -p <orchestrator_pass>] [-t <auth_token>] [-o <folder_organization_unit>] [-l <language>]
+
+  Examples:
+    job run ProcessName "https://uipath-orchestrator.myorg.com" default -u admin -p 123456
+    job run ProcessName "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -P Low
+    job run ProcessName "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -P Normal -o MyFolder
+    job run ProcessName "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -P High -o MyFolder
+    job run ProcessName "https://uipath-orchestrator.myorg.com" default -t a7da29a2c93a717110a82 -a myAccount -f false -T 0
+    job run ProcessName "https://uipath-orchestrator.myorg.com" default -t a7da29a2c93a717110a82 -a myAccount -P High -j 3 -w false
+    job run ProcessName "https://uipath-orchestrator.myorg.com" default -t a7da29a2c93a717110a82 -a myAccount -P Low -r robotName -R C:\Temp
+    job run ProcessName "https://uipath-orchestrator.myorg.com" default -t a7da29a2c93a717110a82 -a myAccount -r robotName -R C:\Temp\status.json -l en-US
+
+<h3 id="machine">> machine <<<<============================================================></h3>
+C:\uipathcli\lib\net461>uipcli machine
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  delete       Delete Orchestrator machine by name.
+  connect      Connect the current machine to Orchestrator (additionally provisions a machine and robot on Orchestrator).
+  provision    Provisions a new machine or machine template on an Orchestrator instance, and outputs the license key
+  help         Display more information on a specific command.
+  version      Display version information.
+
+<h4 id="machine-delete">==> machine delete</h4>
+C:\uipathcli\lib\net461>uipcli machine delete
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  -u, --username                  <b>Required</b>. The Orchestrator username used for authentication. Must be used together with the password.
+  -p, --password                  <b>Required</b>. The Orchestrator password used for authentication. Must be used together with the username.
+  -t, --token                     <b>Required</b>. The Orchestrator OAuth2 refresh token used for authentication. Must be used together with the account name and client id.
+  -a, --accountName               <b>Required</b>. The Orchestrator CloudRPA account name. Must be used together with the refresh token and client id.
+  -o, --organizationUnit          The Orchestrator folder (organization unit).
+  -l, --language                  The orchestrator language.
+  -y, --disableTelemetry          Disable telemetry data.
+  --help                          Display this help screen.
+  --version                       Display version information.
+  Machine Name (pos. 0)           <b>Required</b>. The name of the machine to be deleted
+  Orchestrator URL (pos. 1)       <b>Required</b>. The URL of the Orchestrator instance.
+  Orchestrator Tenant (pos. 2)    <b>Required</b>. The tenant of the Orchestrator instance.
+
+  machine delete usage: machine delete <machine_name> <orchestrator_url> <orchestrator_tenant> [-u <orchestrator_user> -p <orchestrator_pass>] [-t <auth_token> -a <account_name>] [-l <language>]
+
+<h4 id="machine-connect">==> machine connect</h4>
+C:\uipathcli\lib\net461>uipcli machine connect
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  -z, --machine_description       Description of the machine
+  --nonproduction                 NonProduction number of slots
+  --unattended                    Unattended number of slots
+  --testautomation                TestAutomation number of slots
+  -i, --robot_installationpath    The path to the installed Studio
+  -w, --moverwrite                Overwrite fields in machine if it exists
+  -e, --environments              The comma-separated list of environments to deploy the package to. If the environment does not belong to the default folder (organization unit) it must be prefixed with the folder name, e.g. AccountingTeam\TestEnvironment
+  -d, --description               Description of the robot
+  -x, --isexternal                If the license is external or not
+  -r, --password_robot            Password of the robot
+  -v, --roverwrite                Overwrite fields in robot if it exists
+  -u, --username                  <b>Required</b>. The Orchestrator username used for authentication. Must be used together with the password.
+  -p, --password                  <b>Required</b>. The Orchestrator password used for authentication. Must be used together with the username.
+  -t, --token                     <b>Required</b>. The Orchestrator OAuth2 refresh token used for authentication. Must be used together with the account name and client id.
+  -a, --accountName               <b>Required</b>. The Orchestrator CloudRPA account name. Must be used together with the refresh token and client id.
+  -o, --organizationUnit          The Orchestrator folder (organization unit).
+  -l, --language                  The orchestrator language.
+  -y, --disableTelemetry          Disable telemetry data.
+  --help                          Display this help screen.
+  --version                       Display version information.
+  Robot Name (pos. 0)             <b>Required</b>. Robot Name
+  Robot Type (pos. 1)             <b>Required</b>. Robot Type
+  Robot Hosting Type (pos. 2)     <b>Required</b>. Robot Hosting Type: Standard, Floating
+  Username Robot (pos. 3)         <b>Required</b>. Username for robot
+  Orchestrator URL (pos. 4)       <b>Required</b>. The URL of the Orchestrator instance.
+  Orchestrator Tenant (pos. 5)    <b>Required</b>. The tenant of the Orchestrator instance.
+  Machine Name (pos. 6)           <b>Required</b>. Machine Name
+  Machine Type (pos. 7)           <b>Required</b>. Machine type: Standard or Template
+
+  machine connect usage: machine connect <robot_name> <robot_type> <robot_hosting_type> <username_robot> <orchestrator_url> <orchestrator_tenant> <machine_name> <machine_type> [-u <orchestrator_user> -p <orchestrator_pass>] [-t <auth_token>] [-o <folder>] [-d <robot_description>] [-x <is_external_licensed>] [-e <environment_list>]  [-r <robot_password>] [-z <machine_description>] [--nonproduction <nonproduction_slots>] [--unattended <unattended_slots>] [--testautomation <testautomation_slots>] [-i <robot_installationpath>] [-l <language>]
+
+  Examples:
+    machine connect robot-name StudioPro Standard username-robot "https://uipath-orchestrator.myorg.com" default machine-name Standard -u admin -p 123456 -o OurOrganization -e env-name -r robot-password
+    machine connect robot-name Studio Floating username-robot "https://uipath-orchestrator.myorg.com" default machine-name Standard -u admin -p 123456 -o OurOrganization -e env-name -r robot-password -d Description
+    machine connect robot-name Attended Standard username-robot "https://uipath-orchestrator.myorg.com" default machine-name Template -u admin -p 123456 -o OurOrganization -x -d Description -e env-name -r robot-password --testautomation 1 -i path/to/studio
+    machine connect robot-name TestAutomation Floating username-robot "https://uipath-orchestrator.myorg.com" default machine-name Template -u admin -p 123456 -o OurOrganization -x -d Description -e env-name,env-name2 -r robot-password -l en-US
+	
+<h4 id="machine-provision">==> machine provision</h4>
+C:\uipathcli\lib\net461>uipcli machine provision
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  -d, --description               Description of the machine
+  --nonproduction                 NonProduction number of slots
+  --unattended                    Unattended number of slots
+  --testautomation                TestAutomation number of slots
+  -w, --moverwrite                Overwrite fields in machine if it exists
+  -u, --username                  <b>Required</b>. The Orchestrator username used for authentication. Must be used together with the password.
+  -p, --password                  <b>Required</b>. The Orchestrator password used for authentication. Must be used together with the username.
+  -t, --token                     <b>Required</b>. The Orchestrator OAuth2 refresh token used for authentication. Must be used together with the account name and client id.
+  -a, --accountName               <b>Required</b>. The Orchestrator CloudRPA account name. Must be used together with the refresh token and client id.
+  -o, --organizationUnit          The Orchestrator folder (organization unit).
+  -l, --language                  The orchestrator language.
+  -y, --disableTelemetry          Disable telemetry data.
+  --help                          Display this help screen.
+  --version                       Display version information.
+  Machine Name (pos. 0)           <b>Required</b>. Machine name
+  Machine Type (pos. 1)           <b>Required</b>. Machine type: Standard or Template
+  Orchestrator URL (pos. 2)       <b>Required</b>. The URL of the Orchestrator instance.
+  Orchestrator Tenant (pos. 3)    <b>Required</b>. The tenant of the Orchestrator instance.
+
+  machine provision usage: machine provision <machine_name> <machine_type> <orchestrator_url> <orchestrator_tenant> [-u <orchestrator_user> -p <orchestrator_pass>] [-t <auth_token>] [-o <folder>] [-d <description] [--nonproduction <nonproduction_slots>] [--unattended <unattended_slots>] [--testautomation <testautomation_slots>] [-l <language>]
+
+  Examples:
+    machine provision MachineNameExample Standard "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -o OurOrganization
+    machine provision MachineNameExample Template "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -o ModernFolder
+    machine provision MachineNameExample Standard "https://uipath-orchestrator.myorg.com" default -t a7da29a2c93a717110a82 -a accountName -d MyDescription --nonproduction 1 --unattended 1 --testautomation 1
+    machine provision MachineNameExample Template "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 --nonproduction 1 --unattended 1 --testautomation 1 -l en-US
+
+<h3 id="package">> package <<<<============================================================></h3>
+C:\uipathcli\lib\net461>uipcli package
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  delete     Delete Orchestrator package by name.
+  deploy     Deploy packages to an Orchestrator instance, optionally publishing them to a set of environments.
+  pack       Pack one or more projects into a package.
+  help       Display more information on a specific command.
+  version    Display version information.
+  
+<h4 id="package-delete">==> package delete</h4>
+C:\uipathcli\lib\net461>uipcli package delete
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  -u, --username                  <b>Required</b>. The Orchestrator username used for authentication. Must be used together with the password.
+  -p, --password                  <b>Required</b>. The Orchestrator password used for authentication. Must be used together with the username.
+  -t, --token                     <b>Required</b>. The Orchestrator OAuth2 refresh token used for authentication. Must be used together with the account name and client id.
+  -a, --accountName               <b>Required</b>. The Orchestrator CloudRPA account name. Must be used together with the refresh token and client id.
+  -o, --organizationUnit          The Orchestrator folder (organization unit).
+  -l, --language                  The orchestrator language.
+  -y, --disableTelemetry          Disable telemetry data.
+  --help                          Display this help screen.
+  --version                       Display version information.
+  Package name (pos. 0)           <b>Required</b>. The name of the package to be deleted
+  Orchestrator URL (pos. 1)       <b>Required</b>. The URL of the Orchestrator instance.
+  Orchestrator Tenant (pos. 2)    <b>Required</b>. The tenant of the Orchestrator instance.
+
+  package delete usage: package delete <package_name> <orchestrator_url> <orchestrator_tenant> [-u <orchestrator_user> -p <orchestrator_pass>] [-t <auth_token> -a <account_name>] [-l <language>]
+
+  Examples:
+    package delete PackageName "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -l en-US
+	
+<h4 id="package-deploy">==> package deploy</h4>
+C:\uipathcli\lib\net461>uipcli package deploy
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  -e, --environments              The comma-separated list of environments to deploy the package to. If the environment does not belong to the default folder (organization unit) it must be prefixed with the folder name, e.g. AccountingTeam\TestEnvironment
+  -u, --username                  <b>Required</b>. The Orchestrator username used for authentication. Must be used together with the password.
+  -p, --password                  <b>Required</b>. The Orchestrator password used for authentication. Must be used together with the username.
+  -t, --token                     <b>Required</b>. The Orchestrator OAuth2 refresh token used for authentication. Must be used together with the account name and client id.
+  -a, --accountName               <b>Required</b>. The Orchestrator CloudRPA account name. Must be used together with the refresh token and client id.
+  -o, --organizationUnit          The Orchestrator folder (organization unit).
+  -l, --language                  The orchestrator language.
+  -y, --disableTelemetry          Disable telemetry data.
+  --help                          Display this help screen.
+  --version                       Display version information.
+  Package(s) Path (pos. 0)        <b>Required</b>. The path to a folder containing packages, or to a package file.
+  Orchestrator URL (pos. 1)       <b>Required</b>. The URL of the Orchestrator instance.
+  Orchestrator Tenant (pos. 2)    <b>Required</b>. The tenant of the Orchestrator instance.
+
+  package deploy usage: package deploy <packages_path> <orchestrator_url> <orchestrator_tenant> [-u <orchestrator_user> -p <orchestrator_pass>] [-t <auth_token> -a <account_name>] [-o <folder_organization_unit>] [-e <environment_list>] [-l <language>]
+
+  Examples:
+    package deploy "C:\UiPath\Project 1" "https://uipath-orchestrator.myorg.com" default -u admin -p 123456
+    package deploy "C:\UiPath\Project\Package.1.0.6820.22047.nupkg" "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -o OurOrganization
+    package deploy "C:\UiPath\Project\Package.1.0.6820.22047.nupkg" "https://uipath-orchestrator.myorg.com" default -t a7da29a2c93a717110a82 -a myAccount
+    package deploy "C:\UiPath\Project\TestsPackage.1.0.6820.22047.nupkg" "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -e SAPEnvironment,ExcelAutomationEnvironment -l en-US
+	
+<h4 id="package-pack">==> package pack</h4>
+C:\uipathcli\lib\net461>uipcli package pack
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  -o, --output                        <b>Required</b>. Destination folder.
+  -v, --version                       Package version.
+  --autoVersion                       Auto-generate package version.
+  --outputType                        Force the output to a specific type.
+  --libraryOrchestratorUsername       (Optional, useful only for libraries) The Orchestrator username used for authentication. Must be used together with the password.
+  --libraryOrchestratorPassword       (Optional, useful only for libraries) The Orchestrator password used for authentication. Must be used together with the username.
+  --libraryOrchestratorAuthToken      (Optional, useful only for libraries) The Orchestrator OAuth2 refresh token used for authentication. Must be used together with the account name and client id.
+  --libraryOrchestratorAccountName    (Optional, useful only for libraries) The Orchestrator CloudRPA account name. Must be used together with the refresh token and client id.
+  --libraryOrchestratorFolder         (Optional, useful only for libraries) The Orchestrator folder (organization unit).
+  --libraryOrchestratorUrl            (Optional, useful only for libraries) The Orchestrator URL.
+  --libraryOrchestratorTenant         (Optional, useful only for libraries) The Orchestrator tenant.
+  -y, --disableTelemetry
+  -l, --language                      The orchestrator language.
+  --help                              Display this help screen.
+  --version                           Display version information.
+  Project(s) Path (pos. 0)            <b>Required</b>. Path to a project.json file or a folder containing project.json files.
+
+  package pack usage: package pack <project_path> -o <destination_folder> [-v <version>] [--autoVersion] [--outputType <Process|Library|Tests|Objects>] [--libraryOrchestratorUrl <orchestrator_url> --libraryOrchestratorTenant <orchestrator_tenant>] [--libraryOrchestratorUsername <orchestrator_user> --libraryOrchestratorPassword <orchestrator_pass>] [--libraryOrchestratorAuthToken <auth_token> --libraryOrchestratorAccountName <account_name>] [--libraryOrchestratorFolder <folder>] [-l <language>]
+
+  Examples:
+    package pack "C:\UiPath\Project\project.json" -o "C:\UiPath\Package"
+    package pack "C:\UiPath\Project\project.json" -o "C:\UiPath\Package" -v 1.0.6820.22047
+    package pack "C:\UiPath\Project\project.json" -o "C:\UiPath\Package" --autoVersion
+    package pack "C:\UiPath\Project" -o "C:\UiPath\Package"
+    package pack "C:\UiPath\Project\project.json" -o "C:\UiPath\Package" --outputType Tests -l en-US
+  
+<h3 id="process">> process <<<<============================================================></h3>
+C:\uipathcli\lib\net461>uipcli process
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  delete     Delete Orchestrator process by name.
+  help       Display more information on a specific command.
+  version    Display version information.
+
+<h4 id="process-delete">==> process delete</h4>
+C:\uipathcli\lib\net461>uipcli process delete
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  -e, --environment               Delete the process for an environment
+  -u, --username                  <b>Required</b>. The Orchestrator username used for authentication. Must be used together with the password.
+  -p, --password                  <b>Required</b>. The Orchestrator password used for authentication. Must be used together with the username.
+  -t, --token                     <b>Required</b>. The Orchestrator OAuth2 refresh token used for authentication. Must be used together with the account name and client id.
+  -a, --accountName               <b>Required</b>. The Orchestrator CloudRPA account name. Must be used together with the refresh token and client id.
+  -o, --organizationUnit          The Orchestrator folder (organization unit).
+  -l, --language                  The orchestrator language.
+  -y, --disableTelemetry          Disable telemetry data.
+  --help                          Display this help screen.
+  --version                       Display version information.
+  Process name (pos. 0)           <b>Required</b>. The name of the process to be deleted
+  Orchestrator URL (pos. 1)       <b>Required</b>. The URL of the Orchestrator instance.
+  Orchestrator Tenant (pos. 2)    <b>Required</b>. The tenant of the Orchestrator instance.
+
+  process delete usage: process delete <process_name> <orchestrator_url> <orchestrator_tenant> [-u <orchestrator_user> -p <orchestrator_pass>] [-t <auth_token> -a <account_name>] [-e <env_name>] [-l <language>]
+
+  Examples:
+    process delete ProcessName "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -e EnvName -l en-US
+
+<h3 id="asset">> asset <<<<============================================================></h3>
+C:\uipathcli\lib\net461>uipcli asset
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  delete     Delete assets from an Orchestrator instance (based on asset name).
+  deploy     Deploy assets to an Orchestrator instance.
+  help       Display more information on a specific command.
+  version    Display version information.
+
+<h4 id="asset-delete">==> asset delete</h4>
+C:\uipathcli\lib\net461>uipcli asset delete
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  -u, --username                  <b>Required</b>. The Orchestrator username used for authentication. Must be used together with the password.
+  -p, --password                  <b>Required</b>. The Orchestrator password used for authentication. Must be used together with the username.
+  -t, --token                     <b>Required</b>. The Orchestrator OAuth2 refresh token used for authentication. Must be used together with the account name and client id.
+  -a, --accountName               <b>Required</b>. The Orchestrator CloudRPA account name. Must be used together with the refresh token and client id.
+  -o, --organizationUnit          The Orchestrator folder (organization unit).
+  -l, --language                  The orchestrator language.
+  -y, --disableTelemetry          Disable telemetry data.
+  --help                          Display this help screen.
+  --version                       Display version information.
+  Assets File (pos. 0)            <b>Required</b>. The file containing the assets to be deleted.
+
+                                  The following is a sample csv file. The column names are <b>Required</b>! Only the first column is used but you need to at least have empty columns in place.
+                                  name,type,value
+                                  asset_1_name,,asset_value # we can have comments
+                                  asset_2_name,integer,
+                                  asset_3_name,,
+                                  asset_4_name,credential,username:password
+
+  Orchestrator URL (pos. 1)       <b>Required</b>. The URL of the Orchestrator instance.
+  Orchestrator Tenant (pos. 2)    <b>Required</b>. The tenant of the Orchestrator instance.
+
+  asset delete usage: asset delete <assets_file> <orchestrator_url> <orchestrator_tenant> [-u <orchestrator_user> -p <orchestrator_pass>] [-t <auth_token>] [-o <folder>] [-l <language>]
+
+  Examples:
+    asset delete assets_file.csv "https://uipath-orchestrator.myorg.com" default -u admin -p 123456
+    asset delete assets_file.csv "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -o OurOrganization
+    asset delete assets_file.csv "https://uipath-orchestrator.myorg.com" default -t a7da29a2c93a717110a82 -a myAccount -l en-US
+
+<h3 id="robot">> robot <<<<============================================================></h3>
+C:\uipathcli\lib\net461>uipcli robot
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  connect      Connect robot with orchestrator, create if its needed
+  delete       Delete robot with a name
+  provision    Provisions a new robot or robot template on an Orchestrator instance, and outputs the key.
+  status       Get robot status.
+  help         Display more information on a specific command.
+  version      Display version information.
+  
+<h4 id="robot-connect">==> robot connect</h4>
+C:\uipathcli\lib\net461>uipcli robot connect
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  -i, --robot_installationpath    The path to the installed Studio
+  -u, --username                  <b>Required</b>. The Orchestrator username used for authentication. Must be used together with the password.
+  -p, --password                  <b>Required</b>. The Orchestrator password used for authentication. Must be used together with the username.
+  -t, --token                     <b>Required</b>. The Orchestrator OAuth2 refresh token used for authentication. Must be used together with the account name and client id.
+  -a, --accountName               <b>Required</b>. The Orchestrator CloudRPA account name. Must be used together with the refresh token and client id.
+  -o, --organizationUnit          The Orchestrator folder (organization unit).
+  -l, --language                  The orchestrator language.
+  -y, --disableTelemetry          Disable telemetry data.
+  --help                          Display this help screen.
+  --version                       Display version information.
+  Machine Name (pos. 0)           <b>Required</b>. Machine Name
+  Orchestrator URL (pos. 1)       <b>Required</b>. The URL of the Orchestrator instance.
+  Orchestrator Tenant (pos. 2)    <b>Required</b>. The tenant of the Orchestrator instance.
+
+  robot connect usage: robot connect <machine_name> <orchestrator_url> <orchestrator_tenant> [-u <orchestrator_user> -p <orchestrator_pass>] [-t <auth_token>] [-o <folder>] [-i <robot_installationpath>] [-l <language>]
+
+  Examples:
+    robot connect machine-name "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -o OurOrganization
+    robot connect machine-name "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -o OurOrganization -i Path -l en-US
+	
+<h4 id="robot-delete">==> robot delete</h4>
+C:\uipathcli\lib\net461>uipcli robot delete
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  -u, --username                  <b>Required</b>. The Orchestrator username used for authentication. Must be used together with the password.
+  -p, --password                  <b>Required</b>. The Orchestrator password used for authentication. Must be used together with the username.
+  -t, --token                     <b>Required</b>. The Orchestrator OAuth2 refresh token used for authentication. Must be used together with the account name and client id.
+  -a, --accountName               <b>Required</b>. The Orchestrator CloudRPA account name. Must be used together with the refresh token and client id.
+  -o, --organizationUnit          The Orchestrator folder (organization unit).
+  -l, --language                  The orchestrator language.
+  -y, --disableTelemetry          Disable telemetry data.
+  --help                          Display this help screen.
+  --version                       Display version information.
+  Robot Name (pos. 0)             <b>Required</b>. The name of the robot to be deleted
+  Orchestrator URL (pos. 1)       <b>Required</b>. The URL of the Orchestrator instance.
+  Orchestrator Tenant (pos. 2)    <b>Required</b>. The tenant of the Orchestrator instance.
+
+  robot delete usage: robot delete <robot_name> <orchestrator_url> <orchestrator_tenant> [-u <orchestrator_user> -p <orchestrator_pass>] [-t <auth_token> -a <account_name>] [-l <language>]
+  
+<h4 id="robot-provision">==> robot provision</h4>
+C:\uipathcli\lib\net461>uipcli robot provision
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  -e, --environments              The comma-separated list of environments to deploy the package to. If the environment does not belong to the default folder (organization unit) it must be prefixed with the folder name, e.g. AccountingTeam\TestEnvironment
+  -d, --description               Description of the robot
+  -x, --isexternal                If the license is external or not
+  -r, --password_robot            Password of the robot
+  -m, --machine_name              Machine Name, <b>Required</b> when robot type is Standard
+  -v, --roverwrite                Overwrite fields in robot if it exists
+  -u, --username                  <b>Required</b>. The Orchestrator username used for authentication. Must be used together with the password.
+  -p, --password                  <b>Required</b>. The Orchestrator password used for authentication. Must be used together with the username.
+  -t, --token                     <b>Required</b>. The Orchestrator OAuth2 refresh token used for authentication. Must be used together with the account name and client id.
+  -a, --accountName               <b>Required</b>. The Orchestrator CloudRPA account name. Must be used together with the refresh token and client id.
+  -o, --organizationUnit          The Orchestrator folder (organization unit).
+  -l, --language                  The orchestrator language.
+  -y, --disableTelemetry          Disable telemetry data.
+  --help                          Display this help screen.
+  --version                       Display version information.
+  Robot Name (pos. 0)             <b>Required</b>. Robot Name
+  Robot Type (pos. 1)             <b>Required</b>. Robot Type
+  Robot Hosting Type (pos. 2)     <b>Required</b>. Robot Hosting Type: Standard, Floating
+  Username Robot (pos. 3)         <b>Required</b>. Username for robot
+  Orchestrator URL (pos. 4)       <b>Required</b>. The URL of the Orchestrator instance.
+  Orchestrator Tenant (pos. 5)    <b>Required</b>. The tenant of the Orchestrator instance.
+
+  robot provision usage: robot provision <robot_name> <robot_type> <robot_hosting_type> <username_robot> <orchestrator_url> <orchestrator_tenant> [-u <orchestrator_user> -p <orchestrator_pass>] [-t <auth_token>] [-o <folder>] [-d <description>] [-x <is_external_licensed>] [-e <environment_list>]  [-r <robot_password>] [-m <machine_name>] [-l <language>]
+
+  Examples:
+    robot provision robot-name StudioPro Standard username-robot "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -o OurOrganization -e env-name -r username-password -m machine-name
+    robot provision robot-name Studio Floating username-robot "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -o OurOrganization -e env-name -r username-password -m machine-name
+    robot provision robot-name Attended Standard username-robot "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -o OurOrganization -x -d Description -e env-name -r username-password -m machine-name
+    robot provision robot-name TestAutomation Floating username-robot "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -o OurOrganization -x -d Description -e env-name,env-name2 -r username-password -m machine-name -l en-US
+	
+<h4 id="robot-status">==> robot status</h4>
+C:\uipathcli\lib\net461>uipcli robot status
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  -u, --username                  <b>Required</b>. The Orchestrator username used for authentication. Must be used together with the password.
+  -p, --password                  <b>Required</b>. The Orchestrator password used for authentication. Must be used together with the username.
+  -t, --token                     <b>Required</b>. The Orchestrator OAuth2 refresh token used for authentication. Must be used together with the account name and client id.
+  -a, --accountName               <b>Required</b>. The Orchestrator CloudRPA account name. Must be used together with the refresh token and client id.
+  -o, --organizationUnit          The Orchestrator folder (organization unit).
+  -l, --language                  The orchestrator language.
+  -y, --disableTelemetry          Disable telemetry data.
+  --help                          Display this help screen.
+  --version                       Display version information.
+  Robot Name (pos. 0)             <b>Required</b>. Robot Name to get status for
+  Orchestrator URL (pos. 1)       <b>Required</b>. The URL of the Orchestrator instance.
+  Orchestrator Tenant (pos. 2)    <b>Required</b>. The tenant of the Orchestrator instance.
+
+  robot status usage: robot status <robot_name> <orchestrator_url> <orchestrator_tenant> [-u <orchestrator_user> -p <orchestrator_pass>] [-t <auth_token>] [-o <folder_organization_unit>] [-l <language>]
+
+  Examples:
+    robot status robot-name "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -o OrganizationUnit
+    robot status robot-name "https://uipath-orchestrator.myorg.com" default -t abcdefg -l en-US
+  
+<h3 id="run">> run <<<<============================================================></h3>
+C:\uipathcli\lib\net461>uipcli run
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  --help                               Display this help screen.
+  --version                            Display version information.
+  Arguments JSON File Path (pos. 0)    <b>Required</b>. The path of the JSON file specifying the run arguments.
+
+   run usage:  run <arguments_json_path>
+
+  Examples:
+     run "C:\\cli_args.json"
+	 
+<h3 id="test">> test <<<<============================================================></h3>
+
+C:\uipathcli\lib\net461>uipcli test
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  convert    Convert JSON test results to another format.
+  run        Tests a given package or runs a test set.
+  help       Display more information on a specific command.
+  version    Display version information.
+
+<h4 id="test-convert">==> test convert</h4>
+C:\uipathcli\lib\net461>uipcli test convert
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  -T, --type                        <b>Required</b>. The type of the new file
+  -y, --disableTelemetry
+  -l, --Language
+  --help                            Display this help screen.
+  --version                         Display version information.
+  JSON File Path (pos. 0)           <b>Required</b>. The path of the JSON file that must be converted.
+  Destination File Path (pos. 1)    <b>Required</b>. The destination path of the new file.
+
+  test convert usage: test convert <json_path> <destination_filepath> [-T <type>] [-l <language>]
+
+  Examples:
+    test convert "C:\\result.json" "C:\\result.xml" -T junit -l en-US
+	
+<h4 id="test-run">==> test run</h4>
+C:\uipathcli\lib\net461>uipcli test run
+UiPath Command Line Interface v20.11.0-dev
+Copyright (c) 2019-2020 UiPath Inc.
+
+  -P, --project-path              The path to a test package file.
+  -S, --testset                   The name of the test set to execute. The test set should use the latest version of the test cases. If the test set does not belong to the default folder (organization unit) it must be prefixed with the folder name, e.g. AccountingTeam\TestSet
+  --out                           Type of result file
+  -r, --result_path               Results file path
+  -e, --environment               The environment to deploy the package to. Must be used together with the project path. <b>Required</b> when not using a modern folder.
+  -w, --timeout                   The time in seconds for waiting to finish test set executions. (default 7200)
+  -u, --username                  <b>Required</b>. The Orchestrator username used for authentication. Must be used together with the password.
+  -p, --password                  <b>Required</b>. The Orchestrator password used for authentication. Must be used together with the username.
+  -t, --token                     <b>Required</b>. The Orchestrator OAuth2 refresh token used for authentication. Must be used together with the account name and client id.
+  -a, --accountName               <b>Required</b>. The Orchestrator CloudRPA account name. Must be used together with the refresh token and client id.
+  -o, --organizationUnit          The Orchestrator folder (organization unit).
+  -l, --language                  The orchestrator language.
+  -y, --disableTelemetry          Disable telemetry data.
+  --help                          Display this help screen.
+  --version                       Display version information.
+  Orchestrator URL (pos. 0)       <b>Required</b>. The URL of the Orchestrator instance.
+  Orchestrator Tenant (pos. 1)    <b>Required</b>. The tenant of the Orchestrator instance.
+
+  test run usage: test run <orchestrator_url> <orchestrator_tenant> [-P <package>] [-S <testset>] [-u <orchestrator_user> -p <orchestrator_pass>] [-t <auth_token> -a <account_name>] [-e <environment>] [-o <folder_organization_unit>] [-l <language>]
+
+  Examples:
+    test run "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -S "MyRobotTests"
+    test run "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -P "C:\UiPath\Project\project.json" -e TestingEnv
+    test run "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -P "C:\UiPath\Project\project.json" -o MyFolder
+    test run "https://uipath-orchestrator.myorg.com" default -u admin -p 123456 -P "C:\UiPath\Project\project.json" -o MyFolder -e MyEnvironment
+    test run "https://uipath-orchestrator.myorg.com" default -t a7da29a2c93a717110a82 -a myAccount -S "MyRobotTests"
+    test run "https://uipath-orchestrator.myorg.com" default -t a7da29a2c93a717110a82 -a myAccount -P "C:\UiPath\Project\project.json" -e TestingEnv --out junit
+    test run "https://uipath-orchestrator.myorg.com" default -t a7da29a2c93a717110a82 -a myAccount -P "C:\UiPath\Project\project.json" -e TestingEnv -r "C:\results.json" --out uipath -l en-US
+
+</pre>
+</body>
+</html>
